@@ -1,0 +1,18 @@
+name: Update Docker image
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-16.04
+    steps:
+      - uses: actions/checkout@v1
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag docker.pkg.github.com/qassette/migrations/migrations:latest
+      - name: Sign in to Github Registry
+        run: docker login docker.pkg.github.com --username shkrt -p ${{ secrets.GITHUB_TOKEN }}
+      - name: Push docker image
+        run: docker push docker.pkg.github.com/qassette/migrations/migrations:latest
