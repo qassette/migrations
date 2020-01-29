@@ -9,4 +9,4 @@ COPY ./Gemfile.lock /app/Gemfile.lock
 RUN bundle install
 COPY . /app/
 
-ENTRYPOINT ["entrypoint.sh"]
+ENTRYPOINT ["app/entrypoint.sh"]
